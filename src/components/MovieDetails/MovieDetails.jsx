@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import noImage from '../../images/no_img.png';
 
 const MovieDetails = ({
@@ -27,5 +29,16 @@ const MovieDetails = ({
       <span>{genreName}</span>
     </>
   );
+};
+
+MovieDetails.propTypes = {
+  poster_path: PropTypes.string,
+  vote_average: PropTypes.number.isRequired,
+  genres: PropTypes.arrayOf(
+    PropTypes.shape({ name: PropTypes.string.isRequired }),
+  ).isRequired,
+  release_date: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  overview: PropTypes.string.isRequired,
 };
 export default MovieDetails;

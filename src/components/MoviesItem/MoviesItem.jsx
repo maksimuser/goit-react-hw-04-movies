@@ -1,17 +1,23 @@
 import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styles from './MoviesItem.module.scss';
 
 const MoviesItem = ({ movie, location }) => {
   return (
-    <li>
-      <Link
-        to={{
-          pathname: `/movies/${movie.id}`,
-          state: { from: location },
-        }}
-      >
-        {movie.title}
-      </Link>
-    </li>
+    <Link
+      className={styles.Link}
+      to={{
+        pathname: `/movies/${movie.id}`,
+        state: { from: location },
+      }}
+    >
+      {movie.title}
+    </Link>
   );
+};
+
+MoviesItem.propTypes = {
+  movie: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 export default withRouter(MoviesItem);

@@ -1,4 +1,5 @@
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ButtonGoBack = ({ history, location }) => {
   const handleGoBack = () => {
@@ -9,5 +10,10 @@ const ButtonGoBack = ({ history, location }) => {
       Go back
     </button>
   );
+};
+
+ButtonGoBack.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 export default withRouter(ButtonGoBack);
