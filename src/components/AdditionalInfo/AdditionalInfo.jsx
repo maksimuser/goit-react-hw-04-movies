@@ -1,10 +1,16 @@
-import { Component } from 'react';
+import { Component, Suspense, lazy } from 'react';
 import { NavLink, Switch, Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import routes from '../../routes';
-import Cast from '../Cast';
-import Reviews from '../Reviews';
+// import Cast from '../Cast';
+// import Reviews from '../Reviews';
 import styles from './AdditionalInfo.module.scss';
+
+const Cast = lazy(() => import('../Cast' /* webpackChunkName: "Cast" */));
+
+const Reviews = lazy(() =>
+  import('../Reviews' /* webpackChunkName: "Reviews" */),
+);
 
 class AdditionalInfo extends Component {
   render() {
@@ -36,10 +42,15 @@ class AdditionalInfo extends Component {
             Reviews
           </NavLink>
         </nav>
-        <Switch>
-          <Route path={`${routes.moviesDetails}/cast`} component={Cast} />
-          <Route path={`${routes.moviesDetails}/reviews`} component={Reviews} />
-        </Switch>
+        <Suspense fallback={<h3>Loading page...</h3>}>
+          <Switch>
+            <Route path={`${routes.moviesDetails}/cast`} component={Cast} />
+            <Route
+              path={`${routes.moviesDetails}/reviews`}
+              component={Reviews}
+            />
+          </Switch>
+        </Suspense>
       </>
     );
   }
