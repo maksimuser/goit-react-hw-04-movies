@@ -17,7 +17,11 @@ class SearchForm extends Component {
 
     evt.preventDefault();
 
-    onSubmit(query);
+    if (query) {
+      onSubmit(query);
+    } else {
+      return alert('Enter something a word ');
+    }
 
     history.push({
       search: `query=${query}`,
